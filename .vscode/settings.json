@@ -11,7 +11,10 @@
   "prettier.jsxSingleQuote": true,
   "prettier.quoteProps": "consistent",
   "prettier.singleQuote": true,
-  "prettier.bracketSameLine": true,
+  "prettier.bracketSameLine": false,
+  "prettier.printWidth": 80,
+  "prettier.trailingComma": "all",
+  "prettier.bracketSpacing": true,
   "editor.suggestSelection": "recentlyUsedByPrefix",
   "editor.guides.bracketPairs": "active",
   "html.suggest.html5": true,
@@ -24,6 +27,9 @@
   "git.mergeEditor": false,
   "editor.formatOnSave": true,
   "tailwindCSS.emmetCompletions": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
   "cSpell.language": "en,en-US,en-GB",
   "cSpell.enableFiletypes": ["dockerfile", "firerules", "ini", "sql"],
   "cSpell.customDictionaries": {
@@ -34,5 +40,5 @@
       "scope": "user"
     }
   },
-  "cSpell.words": ["paren"]
+  "cSpell.words": ["headlessui", "paren"]
 }

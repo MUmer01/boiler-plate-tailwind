@@ -14,13 +14,18 @@
     "plugin:@typescript-eslint/recommended",
     "prettier"
   ],
-  "overrides": [],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["react", "react-hooks", "@typescript-eslint", "prettier"],
+  "plugins": [
+    "react",
+    "react-hooks",
+    "@typescript-eslint",
+    "prettier",
+    "simple-import-sort"
+  ],
   "rules": {
     // https://eslint.org/docs/latest/rules/
     // "no-inner-declarations": "off",
@@ -32,9 +37,14 @@
     // "@typescript-eslint/ban-ts-ignore": "off",
     // "@typescript-eslint/ban-ts-comment": "off",
     // "@typescript-eslint/no-empty-function": "off",
+    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/prefer-optional-chain": "error",
+    "@typescript-eslint/no-unused-vars": "error",
+    "react-hooks/exhaustive-deps": "off",
+    "prefer-template": "error",
     "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",
-    "comma-dangle": ["error", "never"],
+    "comma-dangle": "off",
     "camelcase": "error",
     "spaced-comment": "warn",
     "quotes": ["error", "single"],
@@ -48,28 +58,71 @@
     "prefer-spread": "warn",
     "no-self-compare": "error",
     "no-template-curly-in-string": "warn",
-    "no-use-before-define": "error",
+    // "no-use-before-define": "error",
     "consistent-return": "warn",
     "dot-notation": "error",
     "eqeqeq": "error",
     "no-alert": "error",
     "no-console": ["error", { "allow": ["warn", "error"] }],
+    /* "max-len": [
+      "error",
+      {
+        "code": 80,
+        "tabWidth": 2,
+        "ignoreRegExpLiterals": true,
+        "ignoreUrls": true,
+        "ignoreStrings": true,
+        "ignoreTemplateLiterals": true
+      }
+    ], */
     "no-else-return": "error",
     "no-nested-ternary": "error",
     "no-var": "error",
     "require-await": "error",
-    "sort-imports": ["warn", { "ignoreCase": true }],
-    "sort-keys": ["warn", "asc", { "natural": true }],
-    "array-bracket-newline": ["error", { "multiline": true }],
-    "array-bracket-spacing": ["error", "never"],
-    "array-element-newline": ["error", "consistent"],
-    "arrow-spacing": ["error", { "before": true, "after": true }],
-    "arrow-parens": ["error", "always"],
-    "block-spacing": "error",
-    "brace-style": ["error", "1tbs"],
-    "comma-spacing": ["error", { "before": false, "after": true }],
-    "function-paren-newline": ["error", "consistent"]
+    // "sort-imports": ["warn", { "ignoreCase": true }],
+    // "sort-keys": ["warn", "asc", { "natural": true }],
+    // "array-bracket-newline": ["error", { "multiline": true }],
+    // "array-bracket-spacing": ["error", "never"],
+    // "array-element-newline": ["error", "consistent"],
+    // "arrow-spacing": ["error", { "before": true, "after": true }],
+    // "arrow-parens": ["error", "always"],
+    // "block-spacing": "error",
+    // "brace-style": ["error", "1tbs"],
+    // "comma-spacing": ["error", { "before": false, "after": true }],
+    "function-paren-newline": ["error", "consistent"],
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error"
   },
+  "overrides": [
+    {
+      "files": ["**/*.js", "**/*.jss", "**/*.ts", "**/*.tsx"],
+      "rules": {
+        "simple-import-sort/imports": [
+          "error",
+          {
+            "groups": [
+              // `react` first, `next` second, then packages starting with a character
+              ["^react$", "^react", "^next", "^[a-zA-Z]"],
+              // Packages starting with `@`
+              ["^@"],
+              // Packages starting with `~`
+              ["^~"],
+              // Imports starting with `src/`
+              ["^src/"],
+              // Imports starting with `../`
+              ["^src/", "^\\.\\.(?!/?$)", "^\\.\\./?$"],
+              // Imports starting with `./`
+              ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"],
+              // Style imports
+              ["^.+\\.s?css$"],
+              // Side effect imports
+              ["^\\u0000"]
+            ]
+          }
+        ]
+      }
+    }
+  ],
   "settings": {
     "react": {
       "version": "detect"
